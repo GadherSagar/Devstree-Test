@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="fragment"
+            type="com.test.devstree_test.ui.fragment.LocationListFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.fragment.LocationListFragment">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="10dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/ge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="10dp" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/ll_no_data"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/ge"
+            app:layout_constraintStart_toStartOf="@+id/gs"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_no_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/lbl_no_place_available_nlets_start_by_adding_few_places"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_add_poi"
+                style="@style/ThemeOverlay.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:onClick="@{v->fragment.addPoi(true)}"
+                android:paddingHorizontal="28dp"
+                android:text="@string/lbl_add_poi"
+                app:cornerRadius="20dp" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_locations"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="4dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/btn_add_poi_bottom"
+            app:layout_constraintEnd_toEndOf="@+id/ge"
+            app:layout_constraintStart_toStartOf="@+id/gs"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0"
+            tools:itemCount="3"
+            tools:listitem="@layout/row_location_item" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_add_poi_bottom"
+            style="@style/ThemeOverlay.Material3.Button.TextButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:onClick="@{v->fragment.addPoi(false)}"
+            android:text="@string/lbl_add_poi"
+            app:cornerRadius="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/ge"
+            app:layout_constraintStart_toStartOf="@+id/gs"
+            app:layout_constraintTop_toBottomOf="@+id/rv_locations" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_direction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="@string/cd_show_direction"
+            android:onClick="@{v->fragment.openDirection()}"
+            android:src="@drawable/ic_directions"
+            app:backgroundTint="@color/purple_500"
+            app:fabSize="mini"
+            app:layout_constraintBottom_toTopOf="@id/btn_add_poi_bottom"
+            app:layout_constraintEnd_toEndOf="@+id/ge"
+            app:tint="@color/white" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
